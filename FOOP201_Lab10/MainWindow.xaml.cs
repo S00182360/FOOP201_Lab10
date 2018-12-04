@@ -22,7 +22,6 @@ namespace FOOP201_Lab10
     public partial class MainWindow : Window
     {
         ObservableCollection<Bike> BikeList = new ObservableCollection<Bike>();
-        ObservableCollection<Bike> ProductList = new ObservableCollection<Bike>();
         ObservableCollection<Bike> CartList = new ObservableCollection<Bike>();
         static decimal total = 0m;
         string totalMsg = "";
@@ -51,7 +50,11 @@ namespace FOOP201_Lab10
             lbxProducts.ItemsSource = BikeList;
             lbxCart.ItemsSource = CartList;
 
-            tbkCart.Text = totalMsg + total.ToString();
+            string[] cbxOptions = { "All", "Male", "Female" };
+            cbxProductType.ItemsSource = cbxOptions;
+            cbxProductType.SelectedIndex = 0;
+            totalMsg = string.Format("Total: €{0:0.00}", total.ToString());
+            tbkTotal.Text = totalMsg;
         }
 
         private void BtnAdd_Click(object sender, RoutedEventArgs e)
@@ -61,6 +64,8 @@ namespace FOOP201_Lab10
             {
                 CartList.Add(BikeSelected);
                 total += BikeSelected.Price;
+                totalMsg = string.Format("Total: €{0:0.00}", total.ToString());
+                tbkTotal.Text = totalMsg;
             }
         }
 
@@ -71,7 +76,37 @@ namespace FOOP201_Lab10
             {
                 CartList.Remove(BikeRemove);
                 total -= BikeRemove.Price;
+                totalMsg = string.Format("Total: €{0:0.00}", total.ToString());
+                tbkTotal.Text = totalMsg;
             }
+        }
+
+        private void CbxProductType_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            string bikeVariation = cbxProductType.SelectedValue.ToString();
+
+            if (bikeVariation.Equals("All"))
+                lbxProducts.ItemsSource = BikeList;
+
+            else if (bikeVariation.Equals("Male"))
+                lbxProducts.ItemsSource = Filter("Male");
+
+            else if (bikeVariation.Equals("Female"))
+                lbxProducts.ItemsSource = Filter("Female");
+
+        }
+
+        private ObservableCollection<Bike> Filter(string bikeVar)
+        {
+            ObservableCollection<Bike> DisplayList = new ObservableCollection<Bike>();
+
+            foreach (Bike bike in BikeList)
+            {
+                if (bike.Gender == bikeVar)
+                    DisplayList.Add(bike);
+            }
+            return DisplayList;
+    
         }
     }
 }

@@ -13,12 +13,9 @@
         <ListBox x:Name="lbxCart" HorizontalAlignment="Left" Height="194" Margin="475,118,0,0" VerticalAlignment="Top" Width="247"/>
         <Button x:Name="btnAdd" Content="Add to Cart" HorizontalAlignment="Left" Margin="367,156,0,0" VerticalAlignment="Top" Width="75" Click="BtnAdd_Click"/>
         <Button x:Name="btnRemove" Content="Remove from Cart" HorizontalAlignment="Left" Margin="367,230,0,0" VerticalAlignment="Top" Width="75" RenderTransformOrigin="0.22,0.313" Click="BtnRemove_Click"/>
-        <TextBlock x:Name="tbkTotal" HorizontalAlignment="Left" Margin="538,341,0,0" TextWrapping="Wrap" Text="Total: " VerticalAlignment="Top"/>
+        <TextBlock x:Name="tbkTotal" HorizontalAlignment="Left" Margin="538,341,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Text="&lt;&gt;"/>
         <TextBlock HorizontalAlignment="Left" Margin="113,95,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top"/>
-        <ComboBox x:Name="cbxProductType" HorizontalAlignment="Left" Margin="210,95,0,0" VerticalAlignment="Top" Width="120">
-            <ComboBoxItem Content="All" HorizontalAlignment="Left" Width="118"/>
-            <ComboBoxItem Content="Male" HorizontalAlignment="Left" Width="118"/>
-            <ComboBoxItem Content="Female" HorizontalAlignment="Left" Width="118"/>
+        <ComboBox x:Name="cbxProductType" HorizontalAlignment="Left" Margin="210,95,0,0" VerticalAlignment="Top" Width="120" SelectionChanged="CbxProductType_SelectionChanged" SelectedIndex="0">
         </ComboBox>
 
     </Grid>
